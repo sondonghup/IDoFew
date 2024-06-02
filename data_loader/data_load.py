@@ -106,7 +106,7 @@ class data_load_manager(ptm_kmeans, ptm_sib, ptm_ft):
                 instruction = f"{instruction}"
                 target_data = f"instruction : {instruction}\noutput : {output}"
                 unlabeled_target_list.append(target_data)
-            self.unlabeled_target_list = unlabeled_target_list[:17000]
+            self.unlabeled_target_list = unlabeled_target_list[:17000] # sib clustering 한계 cpu에 따라 변경 가능 하게 바꿔야 할듯
 
         print(f"[Unlabeled Data Loaded!!! unlabel : {len(self.unlabeled_target_list)}]")
 
