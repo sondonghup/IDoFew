@@ -23,6 +23,7 @@ class data_load_manager(ptm_kmeans, ptm_sib, ptm_ft):
                  verbose,
                  tokenizer_path,
                  vocab_size,
+                 max_sib_cluster_num,
                  use_hf_tokenizer,
                  pretrained_model_path,
                  batch_size,
@@ -38,6 +39,7 @@ class data_load_manager(ptm_kmeans, ptm_sib, ptm_ft):
         verbose : sib 클러스터링과 임베딩에 대한 verbose
         tokenizer_path : 토크나이저가 생성될 경로 (토크나이저를 직접 생성할 경우)
         vocab_size : 토크나이저 단어 수
+        max_sib_cluster_num : 최대 sib_cluster 수 (cpu를 고려)
         use_hf_tokenizer : 허깅페이스 토크나이저 (토크나이저를 생성하지 않고 허깅페이스의 토크나이저를 사용할 경우)
         pretrained_model_path : text classification에 사용될 모델
         batch_size : text classification의 batch_size
@@ -71,6 +73,7 @@ class data_load_manager(ptm_kmeans, ptm_sib, ptm_ft):
         self.save_sib_path = '../IDoFew_data/sib/'
 
         self.vocab_size = vocab_size
+        self.max_sib_cluster_num = max_sib_cluster_num
 
         self.logger = set_logger(self.log_dir)
 
@@ -106,7 +109,7 @@ class data_load_manager(ptm_kmeans, ptm_sib, ptm_ft):
                 instruction = f"{instruction}"
                 target_data = f"instruction : {instruction}\noutput : {output}"
                 unlabeled_target_list.append(target_data)
-            self.unlabeled_target_list = unlabeled_target_list[:17000] # sib clustering 한계 cpu에 따라 변경 가능 하게 바꿔야 할듯
+            self.unlabeled_target_list = unlabeled_target_list[:self.max_sib_cluster_num] # sib clustering 한계 cpu에 따라 변경 가능 하게 바꿔야 할듯
 
         print(f"[Unlabeled Data Loaded!!! unlabel : {len(self.unlabeled_target_list)}]")
 

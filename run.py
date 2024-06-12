@@ -11,6 +11,7 @@ if __name__ == "__main__":
     parser.add_argument('--verbose', action = 'store_true')
     parser.add_argument('--tokenizer_path', required = True)
     parser.add_argument('--vocab_size')
+    parser.add_argument('--max_sib_cluster_num', required = True)
     parser.add_argument('--use_hf_tokenizer', action = 'store_true')
     parser.add_argument('--hf_tokenizer_path')
     parser.add_argument('--pretrained_model_path', required = True)
@@ -27,6 +28,7 @@ if __name__ == "__main__":
                                args.verbose,
                                args.tokenizer_path,
                                args.vocab_size,
+                               args.max_sib_cluster_num,
                                args.use_hf_tokenizer,
                                args.pretrained_model_path,
                                args.batch_size,
